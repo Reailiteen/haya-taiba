@@ -9,6 +9,7 @@ const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('introduction');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [logoError, setLogoError] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -34,9 +35,24 @@ const Navigation = () => {
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      // Scroll the target into the middle of the viewport for better focus
+      element.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
       setIsMobileMenuOpen(false);
     }
+  };
+
+  const goToHero = () => {
+    // Scroll the beginning/top of the hero into view and account for fixed navbar height
+    const heroEl = document.getElementById('hero') || document.getElementById('introduction');
+    if (heroEl) {
+      const nav = document.querySelector('nav');
+      const navHeight = nav ? (nav as HTMLElement).offsetHeight : 0;
+      const top = heroEl.getBoundingClientRect().top + window.scrollY - navHeight - 8; // small gap
+      window.scrollTo({ top, behavior: 'smooth' });
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    setIsMobileMenuOpen(false);
   };
 
   return (
@@ -45,25 +61,37 @@ const Navigation = () => {
       animate={{ y: 0 }}
       transition={{ duration: 0.6 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled 
-          ? 'bg-white shadow-lg backdrop-blur-sm' 
+        isScrolled
+          ? 'bg-gray-100/80 shadow-md backdrop-blur-md border-b border-gray-200'
           : 'bg-transparent'
       }`}
     >
       <div className="container mx-auto px-4 lg:px-6">
-        <div className="flex items-center justify-between h-16 lg:h-20">
+  <div className="flex items-center justify-between h-16 lg:h-24">
           {/* Logo */}
           <motion.div
             whileHover={{ scale: 1.05 }}
-            className="flex-shrink-0"
+            className="flex-shrink-0 cursor-pointer"
+            onClick={goToHero}
+            role="button"
+            aria-label="Go to hero"
           >
-            <Image
-              src="/assets/wellbeing-logo-refined.png"
-              alt="مبادرة الحياة الطيبة"
-              width={120}
-              height={40}
-              className="h-8 lg:h-10 w-auto"
-            />
+            {!logoError ? (
+              <Image
+                src="/assets/wellbeing-logo-refined.png"
+                alt="مبادرة الحياة الطيبة"
+                width={140}
+                height={48}
+                className="h-10 lg:h-12 w-auto"
+                onError={() => setLogoError(true)}
+              />
+            ) : (
+              <div className="w-10 h-10 lg:w-12 lg:h-12 bg-gray-100/60 rounded-full flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 text-blue-600">
+                  <path d="M2 12a2 2 0 012-2h3.2l.8-3.2A2 2 0 0110 5h.2a4 4 0 013.9 3.2l.6 3.2H20a2 2 0 012 2v1a2 2 0 01-2 2h-6.2l-1 3.2a2 2 0 01-1.9 1.4H9a2 2 0 01-2-2v-8H4a2 2 0 01-2-2z" />
+                </svg>
+              </div>
+            )}
           </motion.div>
 
           {/* Desktop Navigation */}
@@ -74,11 +102,11 @@ const Navigation = () => {
                 onClick={() => scrollToSection(item.id)}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className={`text-sm xl:text-base font-medium transition-colors duration-200 hover:text-blue-600 ${
+                className={`text-base lg:text-lg xl:text-xl font-semibold transition-colors duration-200 hover:text-blue-600 ${
                   activeSection === item.id
                     ? 'text-blue-600'
-                    : isScrolled 
-                    ? 'text-gray-800' 
+                    : isScrolled
+                    ? 'text-gray-700'
                     : 'text-white'
                 }`}
                 initial={{ opacity: 0, y: -20 }}
@@ -91,12 +119,12 @@ const Navigation = () => {
           </div>
 
           {/* Utility Links */}
-          <div className="hidden lg:flex items-center space-x-4 space-x-reverse">
+          <div className="hidden lg:flex items-center space-x-6 space-x-reverse">
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className={`text-sm font-medium transition-colors duration-200 hover:text-blue-600 ${
-                isScrolled ? 'text-gray-800' : 'text-white'
+              className={`text-base font-semibold transition-colors duration-200 hover:text-blue-600 ${
+                isScrolled ? 'text-gray-700' : 'text-white'
               }`}
             >
               EN
@@ -106,7 +134,7 @@ const Navigation = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className={`p-2 rounded-lg transition-colors duration-200 hover:bg-blue-50 ${
-                isScrolled ? 'text-gray-800' : 'text-white'
+                isScrolled ? 'text-gray-700' : 'text-white'
               }`}
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -120,7 +148,7 @@ const Navigation = () => {
             whileTap={{ scale: 0.95 }}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className={`lg:hidden p-2 rounded-lg transition-colors duration-200 ${
-              isScrolled ? 'text-gray-800' : 'text-white'
+              isScrolled ? 'text-gray-700' : 'text-white'
             }`}
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
