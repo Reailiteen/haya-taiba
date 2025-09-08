@@ -59,33 +59,39 @@ const LogoSection = () => {
             </div>
           </motion.div>
 
-          {/* Logo Image */}
+          {/* Logo / Portrait with semi-circle background */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
             transition={{ duration: 0.8 }}
             className="order-1 lg:order-2 flex justify-center"
           >
-            <div className="relative">
-              {/* Animated Background Circle */}
-              <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                className="absolute inset-0 w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 rounded-full"
-                style={{
-                  background: 'conic-gradient(from 0deg, #FF6B35, #FFD23F, #4ECDC4, #45B7D1, #8E44AD, #FF6B35)'
-                }}
-              />
-              
-              {/* Logo Container */}
-              <div className="relative z-10 w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 bg-white rounded-full flex items-center justify-center shadow-2xl">
-                <Image
-                  src="/assets/logo.webp"
-                  alt="شعار مبادرة الحياة الطيبة"
-                  width={200}
-                  height={200}
-                  className="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 object-contain"
+            <div className="relative w-64 sm:w-80 md:w-96">
+              {/* Semicircle: create a full circle and hide the top half so only the bottom semicircle shows */}
+              <div className="overflow-hidden h-32 sm:h-40 md:h-48">
+                <div
+                  className="absolute left-1/2 -translate-x-1/2 -bottom-32 sm:-bottom-40 md:-bottom-48 w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 rounded-full"
+                  style={{
+                    background: 'linear-gradient(90deg, #FF6B35 0%, #FFD23F 35%, #4ECDC4 65%, #45B7D1 90%)'
+                  }}
                 />
+              </div>
+
+              {/* Portrait placed on top of the semicircle */}
+              <div className="relative flex justify-center">
+                <div className="relative z-20 -mt-20 sm:-mt-24 md:-mt-28">
+                  {/*
+                    NOTE: replace '/assets/portrait.png' with the path of the image you provide.
+                    Falls back to the existing logo file if you prefer: swap the src accordingly.
+                  */}
+                  <Image
+                    src="/assets/portrait.png"
+                    alt="صورة"
+                    width={220}
+                    height={220}
+                    className="w-36 h-36 sm:w-44 sm:h-44 md:w-52 md:h-52 object-cover rounded-full shadow-2xl shadow-black/20"
+                  />
+                </div>
               </div>
             </div>
           </motion.div>

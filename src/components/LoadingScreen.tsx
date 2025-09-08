@@ -90,11 +90,11 @@ const LoadingScreen = ({ onComplete }: LoadingScreenProps) => {
                   className="w-20 h-20 flex items-center justify-center"
                 >
                   <Image
-                    src="/assets/wellbeing-logo-refined.png"
+                    src="/logo_slogan_no_bg_corrected.png"
                     alt="مبادرة الحياة الطيبة"
-                    width={80}
-                    height={80}
-                    className="w-20 h-20 object-contain"
+                    width={120}
+                    height={120}
+                    className="w-28 h-28 object-contain"
                   />
                 </motion.div>
               </div>

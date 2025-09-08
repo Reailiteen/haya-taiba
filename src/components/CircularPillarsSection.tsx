@@ -61,7 +61,7 @@ const CircularPillarsSection = () => {
       {/* Background Image */}
       <div className="absolute inset-0 opacity-10">
         <Image
-          src="/assets/father_children_1920_1.png"
+          src="/assets/images/father_children_1920_1.png"
           alt="Background"
           fill
           className="object-cover"

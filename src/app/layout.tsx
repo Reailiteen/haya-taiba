@@ -1,8 +1,5 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
 import './globals.css';
-
-const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'مبادرة الحياة الطيبة - مركز الحياة الطيبة للتدريب والتطوير المهني',
@@ -21,7 +18,7 @@ export const metadata: Metadata = {
     description: 'مركز الحياة الطيبة للتدريب والتطوير المهني - بناء الأفراد وتحقيق الازدهار من خلال برامج تدريبية شاملة تعزز التوازن بين الجوانب الروحية والعقلية والجسدية والاجتماعية والعاطفية',
     images: [
       {
-        url: '/assets/logo.webp',
+        url: '/logo_no_bg.png',
         width: 1200,
         height: 630,
         alt: 'شعار مبادرة الحياة الطيبة',
@@ -32,7 +29,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'مبادرة الحياة الطيبة - مركز الحياة الطيبة للتدريب والتطوير المهني',
     description: 'مركز الحياة الطيبة للتدريب والتطوير المهني - بناء الأفراد وتحقيق الازدهار من خلال برامج تدريبية شاملة تعزز التوازن بين الجوانب الروحية والعقلية والجسدية والاجتماعية والعاطفية',
-    images: ['/assets/logo.webp'],
+    images: ['/logo_no_bg.png'],
     creator: '@wellbeing_center',
   },
   verification: {
@@ -64,8 +61,8 @@ export default function RootLayout({
               "name": "مركز الحياة الطيبة للتدريب والتطوير المهني",
               "description": "مركز الحياة الطيبة للتدريب والتطوير المهني - بناء الأفراد وتحقيق الازدهار من خلال برامج تدريبية شاملة تعزز التوازن بين الجوانب الروحية والعقلية والجسدية والاجتماعية والعاطفية",
               "url": "https://wellbeing-center.com",
-              "logo": "https://wellbeing-center.com/assets/logo.webp",
-              "image": "https://wellbeing-center.com/assets/father_children_1920_1.png",
+              "logo": "https://wellbeing-center.com/logo_no_bg.png",
+              "image": "https://wellbeing-center.com/assets/images/father_children_1920_1.png",
               "address": {
                 "@type": "PostalAddress",
                 "addressCountry": "QA",
@@ -92,7 +89,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={inter.className}>
+      <body className="font-pingfang">
         {children}
       </body>
     </html>

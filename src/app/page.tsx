@@ -4,13 +4,13 @@ import { useState } from 'react';
 import Image from 'next/image';
 import LoadingScreen from '../components/LoadingScreen';
 import Navigation from '../components/Navigation';
-import Hero from '../components/Hero';
 import Section from '../components/Section';
 import CircularPillarsSection from '../components/CircularPillarsSection';
-import SlickSlider from '../components/SlickSlider/SlickSlider';
 import LogoSection from '../components/LogoSection';
 import SEOHead from '../components/SEOHead';
 import content from '../../public/content.json';
+import Statement from '../components/Statement';
+import HeroSection from '../components/HeroSection';
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
@@ -27,8 +27,9 @@ export default function Home() {
       {/* Main Content */}
       <main className={`min-h-screen transition-opacity duration-500 ${isLoading ? 'opacity-0' : 'opacity-100'}`}>
         <Navigation />
-        <Hero />
-        
+        {/* <Hero /> */}
+        <HeroSection />
+        <Statement />
         <Section
           id="introduction"
           title={content.introduction.title}
@@ -60,9 +61,7 @@ export default function Home() {
         {/* Replace old PillarsSection with new CircularPillarsSection */}
         <CircularPillarsSection />
         
-        {/* Add SlickSlider */}
-        <SlickSlider />
-        
+
         <Section
           id="enhancement"
           title={content.enhancement.title}
@@ -80,7 +79,7 @@ export default function Home() {
               <div className="lg:col-span-2">
                 <div className="flex items-center mb-6">
                   <Image
-                    src="/assets/wellbeing-logo-refined.png"
+                    src="/logo_no_bg.png"
                     alt="مبادرة الحياة الطيبة"
                     width={120}
                     height={40}
