@@ -88,14 +88,14 @@ const CircularPillarsSection = () => {
         {/* Circular Layout Container */}
         <div className="relative flex justify-center items-center min-h-[600px] md:min-h-[700px]">
           {/* Center Circle */}
-          <motion.div
-            initial={{ scale: 0, opacity: 0 }}
-            animate={isInView ? { scale: 1, opacity: 1 } : { scale: 0, opacity: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="absolute z-10 w-16 h-16 md:w-40 md:h-40 lg:w-48 lg:h-48 wellbeing-gradient rounded-full flex items-center justify-center shadow-lg"
-          >
-              <span className="text-white text-sm md:text-2xl lg:text-3xl font-bold">الأركان</span>
-          </motion.div>
+                      <Image
+                src="logo_no_bg.png"
+                alt="شعار الأركان"
+                width={120}
+                height={120}
+                className="w-35 h-auto object-contain"
+                priority
+              />
 
           {/* Circling Pillar Elements */}
           <motion.div
@@ -174,7 +174,6 @@ const CircularPillarsSection = () => {
             )}
           </motion.div>
         </div>
-
         {/* iOS App Store Style Modal */}
         <AnimatePresence>
           {selectedPillar && (

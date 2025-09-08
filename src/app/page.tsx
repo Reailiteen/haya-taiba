@@ -9,7 +9,7 @@ import CircularPillarsSection from '../components/CircularPillarsSection';
 import LogoSection from '../components/LogoSection';
 import SEOHead from '../components/SEOHead';
 import content from '../../public/content.json';
-import Statement from '../components/Statement';
+import Statement from '../components/StatementSection';
 import HeroSection from '../components/HeroSection';
 
 export default function Home() {
@@ -30,12 +30,7 @@ export default function Home() {
         {/* <Hero /> */}
         <HeroSection />
         <Statement />
-        <Section
-          id="introduction"
-          title={content.introduction.title}
-          content={content.introduction.content}
-          backgroundColor="bg-white"
-        />
+
         
         <Section
           id="about"

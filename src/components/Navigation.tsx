@@ -37,8 +37,13 @@ const Navigation = () => {
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      // Scroll the target into the middle of the viewport for better focus
-      element.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
+      // Trigger animation reset by dispatching a custom event
+      window.dispatchEvent(new CustomEvent('triggerSectionAnimation', { detail: { sectionId } }));
+      
+      // Small delay to ensure animation reset before scrolling
+      setTimeout(() => {
+        element.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
+      }, 50);
     }
   };
 

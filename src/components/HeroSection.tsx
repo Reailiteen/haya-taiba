@@ -88,12 +88,15 @@ export default function HeroSection() {
   const [direction, setDirection] = useState<1 | -1>(1);
   const [isPaused, setPaused] = useState(false);
   const [isUserInteracting, setIsUserInteracting] = useState(false);
+  const [progress, setProgress] = useState(0);
   const reduceMotion = useReducedMotion();
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const progressRef = useRef<NodeJS.Timeout | null>(null);
   const [announcement, setAnnouncement] = useState("");
 
   const next = useCallback(() => {
     setDirection(1);
+    setProgress(0);
     setIndex((i) => {
       const newIndex = (i + 1) % slides.length;
       setAnnouncement(`الشريحة ${newIndex + 1} من ${slides.length}: ${slides[newIndex].title}`);
@@ -103,6 +106,7 @@ export default function HeroSection() {
 
   const prev = useCallback(() => {
     setDirection(-1);
+    setProgress(0);
     setIndex((i) => {
       const newIndex = (i - 1 + slides.length) % slides.length;
       setAnnouncement(`الشريحة ${newIndex + 1} من ${slides.length}: ${slides[newIndex].title}`);
@@ -113,22 +117,39 @@ export default function HeroSection() {
   const goTo = useCallback((i: number) => {
     if (i === index) return;
     setDirection(i > index ? 1 : -1);
+    setProgress(0);
     setIndex(i);
     setAnnouncement(`الشريحة ${i + 1} من ${slides.length}: ${slides[i].title}`);
     setIsUserInteracting(true);
     setTimeout(() => setIsUserInteracting(false), 3000);
   }, [index, slides]);
 
-  // Auto-play logic
+  // Auto-play logic with progress tracking
   useEffect(() => {
-    if (reduceMotion || isPaused || isUserInteracting || slides.length < 2) return;
+    if (reduceMotion || isPaused || isUserInteracting || slides.length < 2) {
+      if (progressRef.current) clearInterval(progressRef.current);
+      return;
+    }
     
+    // Reset progress and start fresh
+    setProgress(0);
+    
+    // Progress updater (updates every 50ms for smooth animation)
+    progressRef.current = setInterval(() => {
+      setProgress(prev => {
+        const newProgress = prev + (50 / 5000) * 100; // 50ms out of 5000ms total
+        return newProgress >= 100 ? 100 : newProgress;
+      });
+    }, 50);
+    
+    // Main slide changer
     intervalRef.current = setInterval(next, 5000);
     
     return () => { 
       if (intervalRef.current) clearInterval(intervalRef.current); 
+      if (progressRef.current) clearInterval(progressRef.current);
     };
-  }, [reduceMotion, isPaused, isUserInteracting, slides.length, next]);
+  }, [reduceMotion, isPaused, isUserInteracting, slides.length, next, index]);
 
   // Pause on page visibility change
   useEffect(() => {
@@ -422,8 +443,8 @@ export default function HeroSection() {
                         stroke="rgba(255,255,255,0.3)"
                         strokeWidth="2"
                       />
-                      {/* Always visible progress circle with animation */}
-                      <motion.circle
+                      {/* Progress circle synced with actual progress */}
+                      <circle
                         cx="35"
                         cy="35"
                         r="32"
@@ -432,12 +453,9 @@ export default function HeroSection() {
                         strokeWidth="4"
                         strokeLinecap="round"
                         strokeDasharray="201.06"
-                        initial={{ strokeDashoffset: 201.06 }}
-                        animate={{ strokeDashoffset: 0 }}
-                        transition={{ 
-                          duration: 5, 
-                          ease: "linear",
-                          repeat: Infinity
+                        strokeDashoffset={201.06 - (progress / 100) * 201.06}
+                        style={{ 
+                          transition: isPaused || isUserInteracting ? 'none' : 'stroke-dashoffset 0.05s linear'
                         }}
                       />
                     </svg>
@@ -466,9 +484,6 @@ export default function HeroSection() {
             );
           })}
         </div>
-        
-        {/* Line under the navigation dots */}
-        <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-4 w-24 h-1 bg-gradient-to-r from-transparent via-white/40 to-transparent"></div>
       </div>
 
       {/* Scroll Indicator */}
