@@ -1,11 +1,11 @@
 'use client';
 
 import React, { useEffect, useRef } from 'react';
-import { motion, Easing, useMotionValue, useTransform } from 'framer-motion';
+import { motion, Easing, useMotionValue, useTransform, MotionValue } from 'framer-motion';
 
 // Module-level shared state so the rotation survives component unmounts/remounts
 let sharedGlobalRot = 0;
-let sharedGlobalMotion: ReturnType<typeof useMotionValue> | null = null;
+let sharedGlobalMotion: MotionValue<number> | null = null;
 let sharedRaf: number | null = null;
 let sharedLastTime: number | null = null;
 let sharedInstances = 0;
@@ -20,7 +20,7 @@ function startSharedRAF(duration: number) {
     sharedLastTime = t;
     const degPerMs = 360 / (duration * 1000);
     sharedGlobalRot = (sharedGlobalRot + degPerMs * dt) % 360;
-    sharedGlobalMotion!.set(sharedGlobalRot);
+    if (sharedGlobalMotion) sharedGlobalMotion.set(sharedGlobalRot);
     sharedRaf = requestAnimationFrame(step);
   };
   sharedRaf = requestAnimationFrame(step);
@@ -39,7 +39,6 @@ interface CirclingElementsProps {
   radius: number;
   duration: number;
   easing?: Easing | Easing[];
-  pauseOnHover?: boolean;
   paused?: boolean;
 }
 
@@ -48,32 +47,18 @@ const CirclingElements: React.FC<CirclingElementsProps> = ({
   radius,
   duration,
   easing = 'linear',
-  pauseOnHover = false,
   paused = false,
 }) => {
-  // Small helper component so we can use hooks per item
-  // ensure shared motion exists
-  if (!sharedGlobalMotion) {
-    // create a motion value via a temporary hook call — this is safe because module-level
-    // initialization runs during first render and hooks must be called inside components, so
-    // we instead create it lazily on mount below.
-  }
-
-  const instanceMotion = useRef<typeof sharedGlobalMotion | null>(null);
-
-  // create a local motion value hook so we can initialize the shared motion on first render
+  // Create shared motion value at component level if not exists
   const localMotion = useMotionValue(sharedGlobalRot);
   if (!sharedGlobalMotion) {
-    sharedGlobalMotion = localMotion as any;
+    sharedGlobalMotion = localMotion;
   }
 
-  useEffect(() => {
-    // create shared motion value on first instance
-    if (!sharedGlobalMotion) {
-      sharedGlobalMotion = useMotionValue(sharedGlobalRot) as any;
-    }
+  const instanceMotion = useRef<MotionValue<number> | null>(null);
 
-    instanceMotion.current = sharedGlobalMotion as any;
+  useEffect(() => {
+    instanceMotion.current = sharedGlobalMotion;
     sharedInstances += 1;
     // start RAF if this is the first instance
     if (sharedInstances === 1 && !paused) startSharedRAF(duration);
@@ -86,9 +71,6 @@ const CirclingElements: React.FC<CirclingElementsProps> = ({
   }, []);
 
   useEffect(() => {
-    // pause/resume control per-instance: when paused is true we don't stop the shared RAF,
-    // we only stop updating the visual by not hiding the motion value. To keep it simple,
-    // if paused -> stop shared RAF; if resumed and there are instances, restart it.
     if (paused) {
       stopSharedRAF();
     } else {
@@ -99,9 +81,11 @@ const CirclingElements: React.FC<CirclingElementsProps> = ({
   const RotatingItem: React.FC<{ index: number; total: number; children: React.ReactNode }> = ({ index, total, children }) => {
     const itemsCount = total || 1;
     const angle = (index * 360) / itemsCount;
-    const source = instanceMotion.current ?? sharedGlobalMotion!;
-    const rotDerived = useTransform(source as any, (v: number) => v + angle);
+    const source = instanceMotion.current ?? sharedGlobalMotion;
+    const rotDerived = useTransform(source!, (v: number) => v + angle);
     const counter = useTransform(rotDerived, (v: number) => -v);
+
+    if (!source) return null; // Safety check after hooks
 
     return (
       <motion.div
@@ -116,7 +100,7 @@ const CirclingElements: React.FC<CirclingElementsProps> = ({
       >
         <div style={{ transform: `translate(${radius}px, 0px)` }}>
           <motion.div style={{ rotate: counter }}>
-            {(children as unknown) as React.ReactNode}
+            {children}
           </motion.div>
         </div>
       </motion.div>
