@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, AnimatePresence } from 'framer-motion';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useInView } from 'framer-motion';
 import Image from 'next/image';
 import content from '../../public/content.json';
@@ -50,6 +50,12 @@ const CircularPillarsSection = () => {
     setSelectedPillar(selectedPillar === pillarId ? null : pillarId);
   };
 
+  // Avoid SSR/CSR hydration mismatch: only render the animated circling elements after mount
+  const [isMounted, setIsMounted] = useState(false);
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   return (
     <section ref={ref} className="py-16 md:py-24 bg-gradient-to-br from-gray-50 to-blue-50 relative overflow-hidden" id="pillars">
       {/* Background Image */}
@@ -97,69 +103,75 @@ const CircularPillarsSection = () => {
             animate={isInView ? { opacity: 1 } : { opacity: 0 }}
             transition={{ duration: 0.8, delay: 0.5 }}
           >
-            <CirclingElements
-              radius={radius}
-              duration={20}
-              easing="linear"
-            >
-              {pillars.map((pillar, index) => (
+            {isMounted ? (
+              <CirclingElements
+                radius={radius}
+                duration={20}
+                easing="linear"
+                paused={!!selectedPillar}
+              >
+                {pillars.map((pillar, index) => (
                   <motion.div
-                  key={pillar.id}
-                  className="cursor-pointer group"
-                  onClick={(event) => handlePillarClick(pillar.id, event)}
-                  initial={{ scale: 0, opacity: 0 }}
-                  animate={isInView ? { scale: 1, opacity: 1 } : { scale: 0, opacity: 0 }}
-                  transition={{
-                    duration: 0.8,
-                    delay: 0.7 + index * 0.1,
-                    type: "spring",
-                    stiffness: 100
-                  }}
-                >
-                  {/* Pillar Circle */}
-                  <motion.div
-                    whileHover={{ scale: 1.15 }}
-                    whileTap={{ scale: 0.95 }}
-                    animate={selectedPillar === pillar.id ? { scale: 1.25 } : { scale: 1 }}
-                    className={`w-12 h-12 md:w-28 md:h-28 lg:w-32 lg:h-32 rounded-full ${getColorClasses(pillar.color)}
-                      flex items-center justify-center shadow-lg border-4 border-white
-                      transition-all duration-300 relative overflow-hidden`}
+                    key={pillar.id}
+                    className="cursor-pointer group"
+                    onClick={(event) => handlePillarClick(pillar.id, event)}
+                    initial={{ scale: 0, opacity: 0 }}
+                    animate={isInView ? { scale: 1, opacity: 1 } : { scale: 0, opacity: 0 }}
+                    transition={{
+                      duration: 0.8,
+                      delay: 0.7 + index * 0.1,
+                      type: "spring",
+                      stiffness: 100
+                    }}
                   >
-                    {/* Ripple Effect */}
+                    {/* Pillar Circle */}
                     <motion.div
-                      initial={{ scale: 0, opacity: 0.5 }}
-                      animate={selectedPillar === pillar.id ? {
-                        scale: [0, 1.5, 0],
-                        opacity: [0.5, 0.2, 0]
-                      } : { scale: 0, opacity: 0 }}
-                      transition={{
-                        duration: 1.5,
-                        repeat: selectedPillar === pillar.id ? Infinity : 0,
-                        ease: "easeOut"
-                      }}
-                      className={`absolute inset-0 rounded-full ${getColorClasses(pillar.color).split(' ')[0]}`}
-                    />
+                      whileHover={{ scale: 1.15 }}
+                      whileTap={{ scale: 0.95 }}
+                      animate={selectedPillar === pillar.id ? { scale: 1.25 } : { scale: 1 }}
+                      className={`w-12 h-12 md:w-28 md:h-28 lg:w-32 lg:h-32 rounded-full ${getColorClasses(pillar.color)}
+                        flex items-center justify-center shadow-lg border-4 border-white
+                        transition-all duration-300 relative overflow-hidden`}
+                    >
+                      {/* Ripple Effect */}
+                      <motion.div
+                        initial={{ scale: 0, opacity: 0.5 }}
+                        animate={selectedPillar === pillar.id ? {
+                          scale: [0, 1.5, 0],
+                          opacity: [0.5, 0.2, 0]
+                        } : { scale: 0, opacity: 0 }}
+                        transition={{
+                          duration: 1.5,
+                          repeat: selectedPillar === pillar.id ? Infinity : 0,
+                          ease: "easeOut"
+                        }}
+                        className={`absolute inset-0 rounded-full ${getColorClasses(pillar.color).split(' ')[0]}`}
+                      />
 
-                    {/* Icon/Text */}
-                    <span className="text-white text-xs md:text-lg lg:text-xl font-bold z-10 text-center px-2">
-                      {pillar.title.split(' ')[1]}
-                    </span>
-                  </motion.div>
+                      {/* Icon/Text */}
+                      <span className="text-white text-xs md:text-lg lg:text-xl font-bold z-10 text-center px-2">
+                        {pillar.title.split(' ')[1]}
+                      </span>
+                    </motion.div>
 
-                  {/* Pillar Label */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.8 + index * 0.1 }}
-                    className="absolute top-full mt-2 left-1/2 transform -translate-x-1/2 text-center"
-                  >
-                    <p className="text-xs md:text-base lg:text-lg font-semibold text-gray-700 whitespace-nowrap">
-                      {pillar.title}
-                    </p>
+                    {/* Pillar Label */}
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.8 + index * 0.1 }}
+                      className="absolute top-full mt-2 left-1/2 transform -translate-x-1/2 text-center"
+                    >
+                      <p className="text-xs md:text-base lg:text-lg font-semibold text-gray-700 whitespace-nowrap">
+                        {pillar.title}
+                      </p>
+                    </motion.div>
                   </motion.div>
-                </motion.div>
-              ))}
-            </CirclingElements>
+                ))}
+              </CirclingElements>
+            ) : (
+              // Render a stable placeholder on server / before mount to avoid hydration mismatch
+              <div className="relative w-full h-[600px] md:h-[700px]"></div>
+            )}
           </motion.div>
         </div>
 

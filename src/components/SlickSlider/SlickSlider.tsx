@@ -5,6 +5,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useInView } from 'framer-motion';
 import SlideComponent from './SlideComponent';
 import CircularNavigation from './CircularNavigation';
+import JourneyTitle from '../JourneyTitle';
 
 interface Slide {
   id: string;
@@ -120,7 +121,7 @@ const SlickSlider = () => {
   };
 
   return (
-    <section ref={ref} className="py-16 md:py-24 bg-gray-50">
+    <section id="journey" ref={ref} className="py-16 md:py-24 bg-gray-50">
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <motion.div
@@ -129,12 +130,7 @@ const SlickSlider = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-800 mb-4">
-            رحلة الحياة الطيبة
-          </h2>
-          <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
-            اكتشف أركان الحياة الطيبة الخمسة وكيف تتكامل لتحقيق التوازن والازدهار
-          </p>
+          <JourneyTitle />
         </motion.div>
 
         {/* Slider Container */}

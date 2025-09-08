@@ -7,6 +7,7 @@
       { "id": "vision", "label": "رؤيتنا" },
       { "id": "definition", "label": "تعريف الحياة الطيبة" },
       { "id": "pillars", "label": "أركان الحياة الطيبة" },
+  { "id": "journey", "label": "رحلة الحياة الطيبة" },
       { "id": "enhancement", "label": "تعزيز الحياة الطيبة" },
       { "id": "logo-section", "label": "شعارنا" }
     ]
