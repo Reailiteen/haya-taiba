@@ -22,13 +22,24 @@
 @tailwind utilities;
 
 @layer base {
+  * {
+    @apply border-border;
+  }
+  
   html {
     font-family: 'FF Shamel', 'Noto Sans Arabic', system-ui, -apple-system, sans-serif;
+    direction: rtl;
+    scroll-behavior: smooth;
   }
   
   body {
+    @apply bg-background text-foreground;
     font-family: 'FF Shamel', 'Noto Sans Arabic', system-ui, -apple-system, sans-serif;
     font-weight: 400; /* Default to Book weight */
+    direction: rtl;
+    text-align: right;
+    line-height: 1.6;
+    background-color: #f8f9fa;
   }
   
   h1, h2, h3, h4, h5, h6 {
@@ -36,11 +47,44 @@
     font-weight: 700; /* Use Bold weight for headings */
   }
   
-  /* Ensure all text elements inherit the font */
+  /* Ensure ALL text elements use FF Shamel */
   *, *::before, *::after {
-    font-family: inherit;
+    font-family: 'FF Shamel', 'Noto Sans Arabic', system-ui, -apple-system, sans-serif !important;
+  }
+  
+  /* Specific text elements */
+  p, span, div, a, button, input, textarea, label, li, td, th {
+    font-family: 'FF Shamel', 'Noto Sans Arabic', system-ui, -apple-system, sans-serif !important;
+    font-weight: 400; /* Default to Book weight */
+  }
+  
+  /* Bold elements use Bold weight */
+  strong, b, .font-bold {
+    font-weight: 700 !important;
   }
 }
+
+/* Force FF Shamel on ALL elements - Override any other font declarations */
+* {
+  font-family: 'FF Shamel', 'Noto Sans Arabic', system-ui, -apple-system, sans-serif !important;
+}
+
+/* Specific overrides for common elements */
+.text-sm, .text-base, .text-lg, .text-xl, .text-2xl, .text-3xl, .text-4xl, .text-5xl, .text-6xl {
+  font-family: 'FF Shamel', 'Noto Sans Arabic', system-ui, -apple-system, sans-serif !important;
+}
+
+/* Framer Motion elements */
+[data-framer-name] {
+  font-family: 'FF Shamel', 'Noto Sans Arabic', system-ui, -apple-system, sans-serif !important;
+}
+
+/* RTL Support */
+html {
+  direction: rtl;
+  scroll-behavior: smooth;
+}
+
 
 :root {
   --radius: 0.625rem;
@@ -123,25 +167,7 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
-    font-family: 'PingFang SC', 'PingFang TC', 'Noto Sans Arabic', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, system-ui, sans-serif;
-    direction: rtl;
-    text-align: right;
-    line-height: 1.6;
-    background-color: #f8f9fa;
-  }
-}
 
-/* RTL Support */
-html {
-  direction: rtl;
-  scroll-behavior: smooth;
-}
 
 /* Wellbeing Custom Styles */
 .wellbeing-gradient {
