@@ -46,7 +46,6 @@ const CirclingElements: React.FC<CirclingElementsProps> = ({
   children,
   radius,
   duration,
-  easing = 'linear',
   paused = false,
 }) => {
   // Create shared motion value at component level if not exists

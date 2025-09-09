@@ -1,4 +1,3 @@
-import { User } from 'lucide-react'
 import Image from 'next/image'
 import { motion, useInView } from 'framer-motion'
 import { useRef, useEffect, useState } from 'react'
@@ -46,15 +45,15 @@ function Statement() {
               </div>
 
               <div className="relative mb-10">
-                <div className="text-8xl text-magenta-400 font-bold leading-none absolute -top-5 -right-2">"</div>
+                <div className="text-8xl text-magenta-400 font-bold leading-none absolute -top-5 -right-2">&ldquo;</div>
                 <p className="text-xl text-gray-600 leading-relaxed px-10 py-5 font-normal text-justify tracking-tight" style={{ wordSpacing: '-0.1em' }}>
                   ستساهم المدينة غير الربحية الأولى من نوعها في تحقيق مستهدفات 
-                  مؤسسة محمد بن سلمان "مسك" في دعم الابتكار وريادة الأعمال وتأهيل 
+                  مؤسسة محمد بن سلمان &ldquo;مسك&rdquo; في دعم الابتكار وريادة الأعمال وتأهيل 
                   قيادات المستقبل وذلك من حيث ما ستوفره من فرص وبرامج تدريب 
                   للشباب والشابات، كما ستضم جملة من الخدمات التي ستساهم في خلق 
                   بيئة جاذبة للمستفيدين من أنشطة المدينة.
                 </p>
-                <div className="text-8xl text-magenta-400 font-bold leading-none absolute -bottom-10 left-5">"</div>
+                <div className="text-8xl text-magenta-400 font-bold leading-none absolute -bottom-10 left-5">&rdquo;</div>
               </div>
 
               <div className="mt-8">

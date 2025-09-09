@@ -7,10 +7,11 @@ import Navigation from '../components/Navigation';
 import Section from '../components/Section';
 import CircularPillarsSection from '../components/CircularPillarsSection';
 import LogoSection from '../components/LogoSection';
-import SEOHead from '../components/SEOHead';
 import content from '../../public/content.json';
 import Statement from '../components/StatementSection';
 import HeroSection from '../components/HeroSection';
+import OfferSection from '../components/OfferSection';
+import PhilosophySection from '../components/PhilosophySection';
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
@@ -31,14 +32,7 @@ export default function Home() {
         <HeroSection />
         <Statement />
 
-        
-        <Section
-          id="about"
-          title={content.about.title}
-          content={content.about.content}
-          backgroundColor="bg-gray-50"
-        />
-        
+      
         <Section
           id="vision"
           title={content.vision.title}
@@ -52,9 +46,15 @@ export default function Home() {
           content={content.definition.content}
           backgroundColor="bg-blue-50"
         />
+
+        {/* Philosophy Section - Misk-style blue section */}
+        <PhilosophySection />
         
         {/* Replace old PillarsSection with new CircularPillarsSection */}
         <CircularPillarsSection />
+
+  {/* Offer / Leasing section (from example site) */}
+  <OfferSection />
         
 
         <Section

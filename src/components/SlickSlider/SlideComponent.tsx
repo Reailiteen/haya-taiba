@@ -1,14 +1,12 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import Image from 'next/image';
 
 interface SlideProps {
   id: string;
   title: string;
   subtitle: string;
   description: string;
-  image: string;
   backgroundColor: string;
   textColor: string;
   isActive: boolean;
@@ -19,7 +17,6 @@ const SlideComponent = ({
   title, 
   subtitle, 
   description, 
-  image, 
   backgroundColor, 
   textColor, 
   isActive 
