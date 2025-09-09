@@ -23,8 +23,8 @@ function Statement() {
   const shouldAnimate = isInView || triggerAnimation;
 
   return (
-    <section id="statement" className="py-12 sm:py-16 md:py-20 bg-gray-100" ref={ref}>
-      <div className="container mx-auto px-4">
+    <section id="statement" className="min-h-[90vh] flex items-center py-12 sm:py-16 md:py-20 bg-gray-100" ref={ref}>
+      <div className="container mx-auto px-2">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={shouldAnimate ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
@@ -35,7 +35,7 @@ function Statement() {
 
             {/* Text Section */}
             <motion.div 
-              className="flex-1 pr-10"
+              className="flex-1 pr-4"
               initial={{ opacity: 0, y: 30 }}
               animate={shouldAnimate ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
               transition={{ delay: 0.2, duration: 0.8 }}
@@ -46,7 +46,7 @@ function Statement() {
 
               <div className="relative mb-10">
                 <div className="text-8xl text-magenta-400 font-bold leading-none absolute -top-5 -right-2">&ldquo;</div>
-                <p className="text-xl text-gray-600 leading-relaxed px-10 py-5 font-normal text-justify tracking-tight" style={{ wordSpacing: '-0.1em' }}>
+                <p className="text-xl text-gray-600 leading-relaxed px-4 py-5 font-normal text-justify tracking-tight" style={{ wordSpacing: '-0.1em' }}>
                   ستساهم المدينة غير الربحية الأولى من نوعها في تحقيق مستهدفات 
                   مؤسسة محمد بن سلمان &ldquo;مسك&rdquo; في دعم الابتكار وريادة الأعمال وتأهيل 
                   قيادات المستقبل وذلك من حيث ما ستوفره من فرص وبرامج تدريب 

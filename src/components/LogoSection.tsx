@@ -10,7 +10,7 @@ const LogoSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="logo" className="py-12 sm:py-16 md:py-20 bg-blue-50" ref={ref}>
+    <section id="logo" className="min-h-[90vh] flex items-center py-12 sm:py-16 md:py-20 bg-blue-50" ref={ref}>
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center max-w-6xl mx-auto">
           {/* Content */}

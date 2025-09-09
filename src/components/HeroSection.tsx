@@ -184,7 +184,7 @@ export default function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative min-h-[100svh] w-full overflow-hidden bg-black"
+      className="relative min-h-[90vh] w-full overflow-hidden bg-black"
       role="region"
       aria-roledescription="carousel"
       aria-label="معرض الصور الرئيسية"

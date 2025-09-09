@@ -32,21 +32,6 @@ export default function Home() {
         <HeroSection />
         <Statement />
 
-      
-        <Section
-          id="vision"
-          title={content.vision.title}
-          content={content.vision.content}
-          backgroundColor="bg-white"
-        />
-        
-        <Section
-          id="definition"
-          title={content.definition.title}
-          content={content.definition.content}
-          backgroundColor="bg-blue-50"
-        />
-
         {/* Philosophy Section - Misk-style blue section */}
         <PhilosophySection />
         

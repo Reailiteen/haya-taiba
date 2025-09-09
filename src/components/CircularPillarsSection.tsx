@@ -57,7 +57,7 @@ const CircularPillarsSection = () => {
   }, []);
 
   return (
-    <section ref={ref} className="py-16 md:py-24 bg-gradient-to-br from-gray-50 to-blue-50 relative overflow-hidden" id="pillars">
+    <section ref={ref} className="min-h-[90vh] flex items-center py-16 md:py-24 bg-gradient-to-br from-gray-50 to-blue-50 relative overflow-hidden" id="pillars">
       {/* Background Image */}
       <div className="absolute inset-0 opacity-10">
         <Image

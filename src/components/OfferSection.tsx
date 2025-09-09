@@ -29,7 +29,7 @@ export default function OfferSection() {
 
   return (
     <>
-      <section id="offers" ref={ref} className="py-20 bg-white">
+      <section id="offers" ref={ref} className="min-h-[90vh] flex items-center py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="flex items-start justify-between">
             <h3 className="text-4xl font-bold text-right text-blue-700">تأجير</h3>

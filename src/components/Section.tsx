@@ -44,7 +44,7 @@ const Section = ({
   return (
     <section 
       id={id} 
-      className={`py-12 sm:py-16 md:py-20 ${backgroundColor} ${className}`}
+      className={`py-12 sm:py-16 md:py-20 min-h-[90vh] flex items-center ${backgroundColor} ${className}`}
       ref={ref}
     >
       <div className="container mx-auto px-4">
