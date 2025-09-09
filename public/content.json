@@ -3,13 +3,10 @@
     "logo": "مبادرة الحياة الطيبة",
     "items": [
       { "id": "statement", "label": "كلمة سعادتها" },
-      { "id": "vision", "label": "رؤيتنا" },
-      { "id": "definition", "label": "تعريف الحياة الطيبة" },
       { "id": "philosophy", "label": "فلسفة الحياة الطيبة" },
-      { "id": "pillars", "label": "أركان الحياة الطيبة" },
-      { "id": "enhancement", "label": "تعزيز الحياة الطيبة" },
-      { "id": "offers", "label": "ماذا نقدم" },
-      { "id": "logo-section", "label": "شعارنا" }
+      { "id": "statistics", "label": "أرقامنا" },
+      { "id": "news", "label": "الأخبار" },
+      { "id": "offers", "label": "ماذا نقدم" }
     ]
   },
   "hero": {

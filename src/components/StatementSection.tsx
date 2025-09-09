@@ -47,19 +47,15 @@ function Statement() {
               <div className="relative mb-10">
                 <div className="text-8xl text-magenta-400 font-bold leading-none absolute -top-5 -right-2">&ldquo;</div>
                 <p className="text-xl text-gray-600 leading-relaxed px-4 py-5 font-normal text-justify tracking-tight" style={{ wordSpacing: '-0.1em' }}>
-                  ستساهم المدينة غير الربحية الأولى من نوعها في تحقيق مستهدفات 
-                  مؤسسة محمد بن سلمان &ldquo;مسك&rdquo; في دعم الابتكار وريادة الأعمال وتأهيل 
-                  قيادات المستقبل وذلك من حيث ما ستوفره من فرص وبرامج تدريب 
-                  للشباب والشابات، كما ستضم جملة من الخدمات التي ستساهم في خلق 
-                  بيئة جاذبة للمستفيدين من أنشطة المدينة.
+                  غايتنا أن ننتقل من الإنسان الاقتصادي إلى الإنسان الشمولي، الذي يُسهم بكل أبعاده الروحية والعاطفية والفكرية والجسدية والاجتماعية في بناء مجتمع متوازن ومستدام.
                 </p>
                 <div className="text-8xl text-magenta-400 font-bold leading-none absolute -bottom-10 left-5">&rdquo;</div>
               </div>
 
               <div className="mt-8">
                 <p className="text-2xl text-magenta-400 font-semibold mb-2">تحقيقًا لرؤية</p>
-                <p className="text-3xl text-purple-800 font-bold leading-tight">صاحب السمو الملكي ولي العهد الأمير محمد</p>
-                <p className="text-3xl text-purple-800 font-bold leading-tight">بن سلمان بن عبد العزيز.</p>
+                <p className="text-3xl text-purple-800 font-bold leading-tight">سعادة الشيخة الدكتورة/ حصة بنت حمد بن خليفة آل ثاني</p>
+                <p className="text-3xl text-purple-800 font-bold leading-tight">المؤسسة، رئيسة مجلس الإدارة للمركز</p>
               </div>
             </motion.div>
 

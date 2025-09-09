@@ -4,14 +4,13 @@ import { useState } from 'react';
 import Image from 'next/image';
 import LoadingScreen from '../components/LoadingScreen';
 import Navigation from '../components/Navigation';
-import Section from '../components/Section';
 import CircularPillarsSection from '../components/CircularPillarsSection';
-import LogoSection from '../components/LogoSection';
 import content from '../../public/content.json';
 import Statement from '../components/StatementSection';
 import HeroSection from '../components/HeroSection';
 import OfferSection from '../components/OfferSection';
 import PhilosophySection from '../components/PhilosophySection';
+import NewsCarousel from '../components/NewsCarousel';
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
@@ -28,28 +27,18 @@ export default function Home() {
       {/* Main Content */}
       <main className={`min-h-screen transition-opacity duration-500 ${isLoading ? 'opacity-0' : 'opacity-100'}`}>
         <Navigation />
-        {/* <Hero /> */}
         <HeroSection />
         <Statement />
-
-        {/* Philosophy Section - Misk-style blue section */}
         <PhilosophySection />
-        
-        {/* Replace old PillarsSection with new CircularPillarsSection */}
-        <CircularPillarsSection />
-
-  {/* Offer / Leasing section (from example site) */}
-  <OfferSection />
-        
-
-        <Section
+        {/* <StatisticsSection /> */}
+        <NewsCarousel />
+        {/* <Section
           id="enhancement"
           title={content.enhancement.title}
           content={content.enhancement.content}
           backgroundColor="bg-white"
-        />
-        
-        <LogoSection />
+        /> */}
+        {/* <OfferSection /> */}
         
         {/* Footer */}
         <footer className="bg-gray-900 text-white py-16">
@@ -92,10 +81,10 @@ export default function Home() {
               <div>
                 <h3 className="text-lg font-semibold mb-6">روابط سريعة</h3>
                 <ul className="space-y-3">
-                  <li><a href="#introduction" className="text-gray-300 hover:text-white transition-colors duration-200">المقدمة</a></li>
-                  <li><a href="#about" className="text-gray-300 hover:text-white transition-colors duration-200">من نحن؟</a></li>
+                  <li><a href="#statement" className="text-gray-300 hover:text-white transition-colors duration-200">كلمة سعادتها</a></li>
                   <li><a href="#vision" className="text-gray-300 hover:text-white transition-colors duration-200">رؤيتنا</a></li>
                   <li><a href="#pillars" className="text-gray-300 hover:text-white transition-colors duration-200">أركان الحياة الطيبة</a></li>
+                  <li><a href="#enhancement" className="text-gray-300 hover:text-white transition-colors duration-200">تعزيز الحياة الطيبة</a></li>
                 </ul>
               </div>
 

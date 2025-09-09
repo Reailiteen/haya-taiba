@@ -53,18 +53,8 @@ export default function OfferSection() {
                 className="relative w-full lg:w-5/12 cursor-pointer"
                 onClick={() => setExpandedCard(o.id)}
               >
-                {/* Idle floating animation wrapper */}
-                <motion.div
-                  animate={{
-                    y: [0, -8, 0]
-                  }}
-                  transition={{
-                    duration: 3,
-                    repeat: Infinity,
-                    repeatType: "reverse",
-                    delay: idx * 0.5,
-                    ease: "easeInOut"
-                  }}
+                {/* Static wrapper - removed floating animation */}
+                <div
                   className="drop-shadow-2xl"
                   style={{
                     filter: `drop-shadow(0 25px 50px rgba(0, 0, 0, 0.3)) drop-shadow(0 0 40px ${offers[idx]?.color || '#0B4FD6'}60)`
@@ -110,7 +100,7 @@ export default function OfferSection() {
                       </div>
                     </motion.div>
                   </motion.div>
-                </motion.div>
+                </div>
               </motion.div>
             ))}
           </div>

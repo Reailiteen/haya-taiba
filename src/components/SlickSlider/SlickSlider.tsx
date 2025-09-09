@@ -5,7 +5,6 @@ import { useState, useEffect, useRef } from 'react';
 import { useInView } from 'framer-motion';
 import SlideComponent from './SlideComponent';
 import CircularNavigation from './CircularNavigation';
-import JourneyTitle from '../JourneyTitle';
 
 interface Slide {
   id: string;
@@ -130,7 +129,6 @@ const SlickSlider = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-12"
         >
-          <JourneyTitle />
         </motion.div>
 
         {/* Slider Container */}

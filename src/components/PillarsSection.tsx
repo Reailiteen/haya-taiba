@@ -84,7 +84,7 @@ const PillarsSection = () => {
   };
 
   return (
-    <section id="pillars" className="py-12 sm:py-16 md:py-20 bg-gray-50" ref={ref}>
+    <section id="pillars" className="min-h-[90vh] flex items-center py-20 bg-gray-50" ref={ref}>
       <div className="container mx-auto px-4">
         {/* Header */}
         <motion.div
