@@ -9,7 +9,7 @@ interface SEOHeadProps {
 }
 
 const SEOHead = ({
-  title = "مبادرة الحياة الطيبة - مركز الحياة الطيبة للتدريب والتطوير المهني",
+  title = "موؤسسة الحياة الطيبة - مركز الحياة الطيبة للتدريب والتطوير المهني",
   description = "مركز الحياة الطيبة للتدريب والتطوير المهني - بناء الأفراد وتحقيق الازدهار من خلال برامج تدريبية شاملة تعزز التوازن بين الجوانب الروحية والعقلية والجسدية والاجتماعية والعاطفية",
   keywords = "التنمية، التدريب، الحياة الطيبة، قطر، التطوير المهني، التوازن، الروحانية، التدريب الشامل، بناء الشخصية، التنمية البشرية، الازدهار، التعليم، الاستشارات",
   ogImage = "/assets/logo.webp",
@@ -69,7 +69,7 @@ const SEOHead = ({
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
       <meta property="og:locale" content="ar_AR" />
-      <meta property="og:site_name" content="مبادرة الحياة الطيبة" />
+      <meta property="og:site_name" content="موؤسسة الحياة الطيبة" />
       
       {/* Twitter */}
       <meta property="twitter:card" content="summary_large_image" />

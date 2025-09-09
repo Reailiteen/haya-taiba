@@ -4,9 +4,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useRef, useEffect } from 'react';
 import { useInView } from 'framer-motion';
 import Image from 'next/image';
-import content from '../../public/content.json';
-import CirclingElements from '../fancy/components/blocks/CirclingElements';
-import useScreenSize from '../hooks/use-screen-size';
+import content from '../../../public/content.json';
+import CirclingElements from '../../fancy/components/blocks/CirclingElements';
+import useScreenSize from '../../hooks/use-screen-size';
 
 interface Pillar {
   id: string;

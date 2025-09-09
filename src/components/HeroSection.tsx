@@ -82,6 +82,12 @@ const textVariants = {
   exit: { opacity: 0, y: -50 },
 };
 
+const lineVariants = {
+  enter: { opacity: 0, y: 30, scale: 0.95 },
+  center: { opacity: 1, y: 0, scale: 1 },
+  exit: { opacity: 0, y: -30, scale: 0.95 },
+};
+
 export default function HeroSection() {
   const slides = useMemo(() => heroSlides, []);
   const [index, setIndex] = useState(0);
@@ -317,23 +323,56 @@ export default function HeroSection() {
               }}
               className="space-y-6"
             >
-              {/* Title */}
-              <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-tight">
+              {/* Title with staggered animation */}
+              <motion.h1 
+                className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-tight"
+                initial="enter"
+                animate="center"
+                exit="exit"
+                variants={reduceMotion ? reducedVariants : lineVariants}
+                transition={{ 
+                  duration: reduceMotion ? 0 : 0.8, 
+                  ease: 'easeOut',
+                  delay: 0.3 
+                }}
+              >
                 {slides[index].title}
-              </h1>
+              </motion.h1>
 
-              {/* Subtitle */}
+              {/* Subtitle with delayed entrance */}
               {slides[index].subtitle && (
-                <h2 className="text-xl sm:text-2xl md:text-3xl font-light text-gray-200 max-w-3xl mx-auto">
+                <motion.h2 
+                  className="text-xl sm:text-2xl md:text-3xl font-light text-gray-200 max-w-3xl mx-auto"
+                  initial="enter"
+                  animate="center"
+                  exit="exit"
+                  variants={reduceMotion ? reducedVariants : lineVariants}
+                  transition={{ 
+                    duration: reduceMotion ? 0 : 0.8, 
+                    ease: 'easeOut',
+                    delay: 0.6 
+                  }}
+                >
                   {slides[index].subtitle}
-                </h2>
+                </motion.h2>
               )}
 
-              {/* Description for main slide */}
+              {/* Description for main slide with further delay */}
               {index === 0 && (
-                <p className="text-base sm:text-lg md:text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
+                <motion.p 
+                  className="text-base sm:text-lg md:text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed"
+                  initial="enter"
+                  animate="center"
+                  exit="exit"
+                  variants={reduceMotion ? reducedVariants : lineVariants}
+                  transition={{ 
+                    duration: reduceMotion ? 0 : 0.8, 
+                    ease: 'easeOut',
+                    delay: 0.9 
+                  }}
+                >
                   اكتشف أركان الحياة الطيبة الخمسة من خلال رحلة نحو التوازن والسعادة
-                </p>
+                </motion.p>
               )}
             </motion.div>
           </AnimatePresence>

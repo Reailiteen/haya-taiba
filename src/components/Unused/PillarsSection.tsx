@@ -3,7 +3,7 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef, useState } from 'react';
 import Image from 'next/image';
-import content from '../../public/content.json';
+import content from '../../../public/content.json';
 
 interface Pillar {
   id: string;

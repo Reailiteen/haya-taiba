@@ -4,19 +4,47 @@ import { useState } from 'react';
 import Image from 'next/image';
 import LoadingScreen from '../components/LoadingScreen';
 import Navigation from '../components/Navigation';
-import CircularPillarsSection from '../components/CircularPillarsSection';
 import content from '../../public/content.json';
 import Statement from '../components/StatementSection';
 import HeroSection from '../components/HeroSection';
 import OfferSection from '../components/OfferSection';
 import PhilosophySection from '../components/PhilosophySection';
 import NewsCarousel from '../components/NewsCarousel';
+import StatsSection from '../components/StatsSection';
+import { Contact, Library } from 'lucide-react';
+import ContactSection from '../components/ContactSection';
+import Bookshelf from '../components/Library/Bookshelf';
+import BookModal from '../components/Library/BookModal';
+
+interface Book {
+  id: number;
+  title: string;
+  author: string;
+  cover: string;
+  pages: string[];
+  description: string;
+  category: string;
+}
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
+  const [selectedBook, setSelectedBook] = useState<Book | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleLoadingComplete = () => {
     setIsLoading(false);
+  };
+
+  const handleBookClick = (book: Book) => {
+    setSelectedBook(book);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setTimeout(() => {
+      setSelectedBook(null);
+    }, 300);
   };
 
   return (
@@ -30,16 +58,18 @@ export default function Home() {
         <HeroSection />
         <Statement />
         <PhilosophySection />
-        {/* <StatisticsSection /> */}
+        <OfferSection />
+        <StatsSection />
+        <Bookshelf onBookClick={handleBookClick} />
         <NewsCarousel />
-        {/* <Section
-          id="enhancement"
-          title={content.enhancement.title}
-          content={content.enhancement.content}
-          backgroundColor="bg-white"
-        /> */}
-        {/* <OfferSection /> */}
+        <ContactSection />
         
+        {/* Book Modal */}
+        <BookModal
+          book={selectedBook}
+          isOpen={isModalOpen}
+          onClose={handleCloseModal}
+        />
         {/* Footer */}
         <footer className="bg-gray-900 text-white py-16">
           <div className="container mx-auto px-4 lg:px-6">

@@ -9,9 +9,54 @@ const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('introduction');
   const [logoError, setLogoError] = useState(false);
+  const [fontError, setFontError] = useState(false);
 
   // Debug info
-  console.log('Navigation render - logoError:', logoError);
+  console.log('Navigation render - logoError:', logoError, 'fontError:', fontError);
+
+  // Check if FF Shamel font is available
+  useEffect(() => {
+    const checkFont = async () => {
+      try {
+        // Wait for fonts to load
+        await document.fonts.ready;
+        
+        // Create a test element to check if the font is available
+        const testElement = document.createElement('div');
+        testElement.style.fontFamily = 'FF Shamel, monospace';
+        testElement.style.fontSize = '16px';
+        testElement.innerHTML = 'Test';
+        testElement.style.position = 'absolute';
+        testElement.style.visibility = 'hidden';
+        document.body.appendChild(testElement);
+        
+        const computedStyle = window.getComputedStyle(testElement);
+        const fontFamily = computedStyle.fontFamily;
+        
+        // Clean up
+        document.body.removeChild(testElement);
+        
+        // Check if FF Shamel is actually being used
+        if (fontFamily.includes('FF Shamel')) {
+          console.log('FF Shamel font loaded successfully');
+          setFontError(false);
+        } else {
+          console.warn('FF Shamel font is not available - using fallback');
+          setFontError(true);
+        }
+      } catch (error) {
+        console.error('Error checking FF Shamel font:', error);
+        setFontError(true);
+      }
+    };
+
+    // Check font availability after DOM is ready
+    if (document.readyState === 'complete') {
+      setTimeout(checkFont, 500);
+    } else {
+      window.addEventListener('load', () => setTimeout(checkFont, 500));
+    }
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -21,6 +66,13 @@ const Navigation = () => {
       const sections = content.navigation.items;
       const scrollPosition = window.scrollY + 100;
       
+      // Check if we're in the hero section (at the top)
+      if (window.scrollY < 200) {
+        setActiveSection(''); // No active section when in hero
+        return;
+      }
+      
+      // Find the current section
       for (let i = sections.length - 1; i >= 0; i--) {
         const section = document.getElementById(sections[i].id);
         if (section && section.offsetTop <= scrollPosition) {
@@ -86,7 +138,7 @@ const Navigation = () => {
             {!logoError ? (
               <Image
                 src="/logo_slogan_no_bg_corrected.png"
-                alt="مبادرة الحياة الطيبة"
+                alt="موؤسسة الحياة الطيبة"
                 width={140}
                 height={48}
                 className="h-20 w-auto"
@@ -107,26 +159,50 @@ const Navigation = () => {
           </motion.div>
           {/* Navigation */}
           <div className="flex items-center space-x-8 space-x-reverse">
+            {/* Font Error Warning */}
+            {fontError && (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="fixed top-20 right-4 bg-red-500 text-white px-3 py-1 rounded-md text-sm z-50"
+              >
+                FF Shamel font not available
+              </motion.div>
+            )}
+            
             {content.navigation.items.map((item, index) => (
               <motion.button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className={`text-base lg:text-lg xl:text-xl font-semibold transition-all duration-1000 ease-in-out hover:scale-105 ${
-                  activeSection === item.id
-                    ? isScrolled 
-                      ? 'text-blue-600 font-bold' 
-                      : 'text-blue-400 font-bold'
-                    : isScrolled
+                className={`relative text-base lg:text-lg xl:text-xl font-semibold transition-all duration-300 ease-in-out hover:scale-105 ${
+                  isScrolled
                     ? 'text-gray-800 hover:text-blue-600'
                     : 'text-white hover:text-blue-400'
                 }`}
+                style={{
+                  fontFamily: fontError 
+                    ? '"Noto Sans Arabic", sans-serif' 
+                    : '"FF Shamel", "Noto Sans Arabic", sans-serif'
+                }}
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
               >
                 {item.label}
+                
+                {/* Animated Underline */}
+                <motion.div
+                  className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600"
+                  initial={{ scaleX: 0 }}
+                  animate={{ 
+                    scaleX: activeSection === item.id ? 1 : 0,
+                    backgroundColor: isScrolled ? '#2563eb' : '#60a5fa'
+                  }}
+                  transition={{ duration: 0.3, ease: 'easeInOut' }}
+                  style={{ transformOrigin: 'center' }}
+                />
               </motion.button>
             ))}
           </div>
