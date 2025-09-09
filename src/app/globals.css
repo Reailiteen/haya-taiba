@@ -1,10 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;400;500;600;700&display=swap');
 
-/* FF Shamel Font - You'll need to add the actual font files to public/fonts/ */
+/* FF Shamel Font - Using available TTF files */
 @font-face {
   font-family: 'FF Shamel';
-  src: url('/fonts/FF-Shamel-Regular.woff2') format('woff2'),
-       url('/fonts/FF-Shamel-Regular.woff') format('woff');
+  src: url('/fonts/FF Shamel Family Sans One Book.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -12,26 +11,7 @@
 
 @font-face {
   font-family: 'FF Shamel';
-  src: url('/fonts/FF-Shamel-Medium.woff2') format('woff2'),
-       url('/fonts/FF-Shamel-Medium.woff') format('woff');
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'FF Shamel';
-  src: url('/fonts/FF-Shamel-SemiBold.woff2') format('woff2'),
-       url('/fonts/FF-Shamel-SemiBold.woff') format('woff');
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'FF Shamel';
-  src: url('/fonts/FF-Shamel-Bold.woff2') format('woff2'),
-       url('/fonts/FF-Shamel-Bold.woff') format('woff');
+  src: url('/fonts/FF Shamel Family Sans One Bold.ttf') format('truetype');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -40,6 +20,27 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  html {
+    font-family: 'FF Shamel', 'Noto Sans Arabic', system-ui, -apple-system, sans-serif;
+  }
+  
+  body {
+    font-family: 'FF Shamel', 'Noto Sans Arabic', system-ui, -apple-system, sans-serif;
+    font-weight: 400; /* Default to Book weight */
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'FF Shamel', 'Noto Sans Arabic', system-ui, -apple-system, sans-serif;
+    font-weight: 700; /* Use Bold weight for headings */
+  }
+  
+  /* Ensure all text elements inherit the font */
+  *, *::before, *::after {
+    font-family: inherit;
+  }
+}
 
 :root {
   --radius: 0.625rem;

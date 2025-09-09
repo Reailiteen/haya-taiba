@@ -8,9 +8,12 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['PingFang SC', 'PingFang TC', 'Noto Sans Arabic', 'var(--font-geist-sans)', 'Arial', 'system-ui', 'sans-serif'],
+        sans: ['FF Shamel', 'Noto Sans Arabic', 'PingFang SC', 'PingFang TC', 'var(--font-geist-sans)', 'Arial', 'system-ui', 'sans-serif'],
         mono: ['var(--font-geist-mono)', 'monospace'],
         pingfang: ['PingFang SC', 'PingFang TC', 'system-ui', 'sans-serif'],
+        'ff-shamel': ['FF Shamel', 'Noto Sans Arabic', 'system-ui', 'sans-serif'],
+        'ff-shamel-book': ['FF Shamel', 'Noto Sans Arabic', 'system-ui', 'sans-serif'],
+        'ff-shamel-bold': ['FF Shamel', 'Noto Sans Arabic', 'system-ui', 'sans-serif'],
       },
       colors: {
         background: 'var(--background)',

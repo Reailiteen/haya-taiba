@@ -1,24 +1,22 @@
 # FF Shamel Font Files
 
-To use the FF Shamel font, please add the following font files to this directory:
+## Available Font Files:
+✅ **Currently Available:**
+- FF Shamel Family Sans One Book.ttf (Font Weight: 400 - Regular)
+- FF Shamel Family Sans One Bold.ttf (Font Weight: 700 - Bold)
 
-- FF-Shamel-Regular.woff2
-- FF-Shamel-Regular.woff
-- FF-Shamel-Medium.woff2
-- FF-Shamel-Medium.woff
-- FF-Shamel-SemiBold.woff2
-- FF-Shamel-SemiBold.woff
-- FF-Shamel-Bold.woff2
-- FF-Shamel-Bold.woff
-
-## How to obtain FF Shamel font:
-
-1. Purchase the font from the official FontFont foundry
-2. Convert to web formats (WOFF2, WOFF) if needed
-3. Place the files in this directory
-4. The font will be automatically loaded and used in the navigation
+## Font Usage:
+- **Navigation Buttons**: Uses FF Shamel Book (regular weight)
+- **Active Section**: Uses FF Shamel Bold for emphasis
+- **Fallback**: Noto Sans Arabic if FF Shamel is unavailable
 
 ## Current Status:
-- Font files are not included due to licensing
-- Navigation will fallback to Noto Sans Arabic when FF Shamel is unavailable
-- Error notification will appear if font is not found
+✅ Font files are present and configured
+✅ Navigation will use FF Shamel when available
+✅ Error notification will appear if font loading fails
+✅ Automatic fallback to Noto Sans Arabic
+
+## Font Configuration:
+The fonts are loaded via @font-face declarations in globals.css:
+- Book variant mapped to font-weight: 400
+- Bold variant mapped to font-weight: 700

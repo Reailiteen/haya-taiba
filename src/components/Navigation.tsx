@@ -21,10 +21,11 @@ const Navigation = () => {
         // Wait for fonts to load
         await document.fonts.ready;
         
-        // Create a test element to check if the font is available
+        // Create a test element to check if FF Shamel Book is available
         const testElement = document.createElement('div');
-        testElement.style.fontFamily = 'FF Shamel, monospace';
+        testElement.style.fontFamily = '"FF Shamel", monospace';
         testElement.style.fontSize = '16px';
+        testElement.style.fontWeight = '400';
         testElement.innerHTML = 'Test';
         testElement.style.position = 'absolute';
         testElement.style.visibility = 'hidden';
@@ -37,11 +38,11 @@ const Navigation = () => {
         document.body.removeChild(testElement);
         
         // Check if FF Shamel is actually being used
-        if (fontFamily.includes('FF Shamel')) {
-          console.log('FF Shamel font loaded successfully');
+        if (fontFamily.toLowerCase().includes('ff shamel') || fontFamily.includes('FF Shamel')) {
+          console.log('FF Shamel font (Book & Bold) loaded successfully');
           setFontError(false);
         } else {
-          console.warn('FF Shamel font is not available - using fallback');
+          console.warn('FF Shamel font files not found - using fallback font');
           setFontError(true);
         }
       } catch (error) {
@@ -52,9 +53,9 @@ const Navigation = () => {
 
     // Check font availability after DOM is ready
     if (document.readyState === 'complete') {
-      setTimeout(checkFont, 500);
+      setTimeout(checkFont, 1000);
     } else {
-      window.addEventListener('load', () => setTimeout(checkFont, 500));
+      window.addEventListener('load', () => setTimeout(checkFont, 1000));
     }
   }, []);
 
@@ -159,14 +160,19 @@ const Navigation = () => {
           </motion.div>
           {/* Navigation */}
           <div className="flex items-center space-x-8 space-x-reverse">
-            {/* Font Error Warning */}
+            {/* Font Error Warning - Global notification */}
             {fontError && (
               <motion.div
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
-                className="fixed top-20 right-4 bg-red-500 text-white px-3 py-1 rounded-md text-sm z-50"
+                className="fixed top-20 right-4 bg-red-500 text-white px-4 py-2 rounded-md text-sm z-50 shadow-lg"
               >
-                FF Shamel font not available
+                <div className="flex items-center gap-2">
+                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                  </svg>
+                  <span>FF Shamel font not loaded - using fallback</span>
+                </div>
               </motion.div>
             )}
             
@@ -176,16 +182,15 @@ const Navigation = () => {
                 onClick={() => scrollToSection(item.id)}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className={`relative text-base lg:text-lg xl:text-xl font-semibold transition-all duration-300 ease-in-out hover:scale-105 ${
+                className={`relative text-base lg:text-lg xl:text-xl transition-all duration-300 ease-in-out hover:scale-105 ${
+                  activeSection === item.id
+                    ? 'font-bold' // Use bold weight for active section
+                    : 'font-normal' // Use book weight for inactive sections
+                } ${
                   isScrolled
                     ? 'text-gray-800 hover:text-blue-600'
                     : 'text-white hover:text-blue-400'
                 }`}
-                style={{
-                  fontFamily: fontError 
-                    ? '"Noto Sans Arabic", sans-serif' 
-                    : '"FF Shamel", "Noto Sans Arabic", sans-serif'
-                }}
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
