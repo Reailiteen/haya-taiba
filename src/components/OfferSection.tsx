@@ -58,7 +58,7 @@ export default function OfferSection() {
       <section id="offers" ref={ref} className="min-h-[90vh] flex items-center py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="flex items-start justify-between">
-            <h3 className="text-4xl font-bold text-right text-blue-700">ماذا نقدم</h3>
+            <h3 className="text-4xl font-bold text-right text-blue-700">مجالات التركيز</h3>
           </div>
 
           <div className="mt-12 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 items-start justify-center">

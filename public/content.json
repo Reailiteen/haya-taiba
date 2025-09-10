@@ -2,9 +2,8 @@
   "navigation": {
     "logo": "مؤسسة الحياة الطيبة",
     "items": [
-      { "id": "statement", "label": "كلمة سعادتها" },
-      { "id": "philosophy", "label": "فلسفة الحياة الطيبة" },
-      { "id": "offers", "label": "ماذا نقدم" },
+      { "id": "statement", "label": "عن المركز" },
+      { "id": "offers", "label": "مجالات التركيز" },
       { "id": "statistics", "label": "أرقامنا" },
       { "id": "news", "label": "المركز الإعلامي" },
       { "id": "contact", "label": "تواصل معنا" }
