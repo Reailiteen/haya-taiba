@@ -169,7 +169,6 @@ export default function OfferSection() {
                         <button
                           className="text-xs lg:text-sm font-semibold text-white/95 bg-white/20 backdrop-blur-sm py-2 px-4 rounded-md hover:bg-white/30 transition-colors duration-200 border border-white/20"
                         >
-                          استكشف الخدمة
                         </button>
                       </div>
                     </div>

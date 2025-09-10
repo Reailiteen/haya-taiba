@@ -48,7 +48,7 @@ export default function PhilosophySection() {
             className="text-5xl lg:text-7xl xl:text-8xl 2xl:text-9xl font-light text-right mb-8 text-yellow-400 leading-tight"
             style={{ fontFamily: "FF Shamel" }}
           >
-            مؤسس الحياة الطيبة
+            مؤسسة الحياة الطيبة
 
           </motion.h2>
 
