@@ -5,7 +5,7 @@ import { motion, useInView, useMotionValue, useSpring } from 'framer-motion';
 import { useRef, useEffect } from 'react';
 import Image from 'next/image';
 
-// Updated statistics data to match Misk exactly
+// Updated statistics data with new Arabic numbers
 const miskStats = [
   {
     id: 'beneficiaries',
@@ -13,7 +13,7 @@ const miskStats = [
     suffix: 'ألف',
     prefix: '+',
     label: 'مسجل في فعاليات ومحافل المنظومة',
-    icon: '/assets/icons/beneficiaries.svg',
+    icon: '/assets/icons/networking.png',
   },
   {
     id: 'hours',
@@ -21,7 +21,7 @@ const miskStats = [
     suffix: 'مليون',
     prefix: '+',
     label: 'ساعة تدريبية مقدمة من برامج وفعاليات المنظومة',
-    icon: '/assets/icons/hours.svg',
+    icon: '/assets/icons/clock.png',
   },
   {
     id: 'programs',
@@ -29,7 +29,7 @@ const miskStats = [
     suffix: '',
     prefix: '',
     label: 'برنامج مقدم من مسارات وجهات المنظومة',
-    icon: '/assets/icons/program.svg',
+    icon: '/assets/icons/check.png',
   },
   {
     id: 'graduates',
@@ -37,7 +37,7 @@ const miskStats = [
     suffix: '',
     prefix: '',
     label: 'قائد متخرج من برامج المنظومة',
-    icon: '/assets/icons/graduate.svg',
+    icon: '/assets/icons/graduate.png',
   },
   {
     id: 'workshops',
@@ -45,7 +45,7 @@ const miskStats = [
     suffix: '',
     prefix: '',
     label: 'ورشة عمل مقدمة من مسارات وجهات المنظومة',
-    icon: '/assets/icons/workshop.svg',
+    icon: '/assets/icons/online-registration.png',
   },
   {
     id: 'registered',
@@ -53,7 +53,7 @@ const miskStats = [
     suffix: 'ألف',
     prefix: '+',
     label: 'مستفيد من مسارات وجهات المنظومة',
-    icon: '/assets/icons/registered.svg',
+    icon: '/assets/icons/add-group.png',
   },
 ];
 
@@ -237,7 +237,7 @@ export default function MiskStatsSection() {
             href="#"
             className="inline-flex items-center gap-3 px-8 py-4 bg-teal-600 text-white font-semibold rounded-lg hover:bg-teal-700 transition-all duration-300 hover:scale-105 shadow-lg"
           >
-            <span>عرض التقرير السنوي 2024</span>
+            <span>عرض التقرير السنوي 2025</span>
             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
             </svg>
