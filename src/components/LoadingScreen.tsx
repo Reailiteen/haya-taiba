@@ -91,7 +91,7 @@ const LoadingScreen = ({ onComplete }: LoadingScreenProps) => {
                 >
                   <Image
                     src="/logo_slogan_no_bg_corrected.png"
-                    alt="موؤسسة الحياة الطيبة"
+                    alt="مؤسسة الحياة الطيبة"
                     width={120}
                     height={120}
                     className="w-28 h-28 object-contain"
@@ -108,7 +108,7 @@ const LoadingScreen = ({ onComplete }: LoadingScreenProps) => {
               className="text-center mb-8"
             >
               <h1 className="text-2xl md:text-3xl font-bold text-gray-800 mb-2">
-                موؤسسة الحياة الطيبة
+                مؤسسة الحياة الطيبة
               </h1>
               <p className="text-gray-600 text-lg">
                 بناء الأفراد وتحقيق الازدهار

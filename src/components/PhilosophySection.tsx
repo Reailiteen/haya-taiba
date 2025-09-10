@@ -23,7 +23,7 @@ export default function PhilosophySection() {
   ], [fadeInUp]);
 
   return (
-    <section id="philosophy" ref={ref} className="py-20 min-h-[90vh] bg-blue-800 text-white relative overflow-hidden flex items-center">
+    <section id="philosophy" ref={ref} className="py-20 min-h-[60vh] bg-purple-800 text-white relative overflow-hidden flex items-center">
       {/* Graph bars stroke on top left - Using CSS background instead of Image for better performance */}
       <div 
         className="absolute top-0 left-0 z-20 w-[230px] h-[120px] opacity-90"

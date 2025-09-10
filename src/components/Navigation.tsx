@@ -128,38 +128,11 @@ const Navigation = () => {
           
       <div className="container mx-auto px-4 lg:px-6">
         
-        <div className="flex items-center justify-between h-21 lg:h-20">
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            className="flex-shrink-0 cursor-pointer"
-            onClick={goToHero}
-            role="button"
-            aria-label="Go to hero"
-          >
-            {!logoError ? (
-              <Image
-                src="/logo_slogan_no_bg_corrected.png"
-                alt="موؤسسة الحياة الطيبة"
-                width={140}
-                height={48}
-                className="h-20 w-auto"
-                priority
-                onError={() => {
-                  console.log('Logo failed to load, switching to fallback');
-                  setLogoError(true);
-                }}
-                onLoad={() => console.log('Logo loaded successfully')}
-              />
-            ) : (
-              <div className="w-10 h-10 lg:w-12 lg:h-12 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center border border-white/20">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 text-white">
-                  <path d="M12 2L2 7v10c0 5.55 3.84 9.74 9 11 5.16-1.26 9-5.45 9-11V7l-10-5z" />
-                </svg>
-              </div>
-            )}
-          </motion.div>
-          {/* Navigation */}
-          <div className="flex items-center space-x-8 space-x-reverse">
+        <div className="flex items-center justify-center h-21 lg:h-20 relative">
+
+          
+          {/* Navigation - centered */}
+          <div className="flex items-center justify-center space-x-8 space-x-reverse">
             {/* Font Error Warning - Global notification */}
             {fontError && (
               <motion.div
@@ -212,7 +185,36 @@ const Navigation = () => {
             ))}
           </div>
 
-          
+                    {/* Logo - positioned absolutely to the right */}
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            className="absolute right-0 flex-shrink-0 cursor-pointer"
+            onClick={goToHero}
+            role="button"
+            aria-label="Go to hero"
+          >
+            {!logoError ? (
+              <Image
+                src="/logo_no_bg.png"
+                alt="مؤسسة الحياة الطيبة"
+                width={140}
+                height={48}
+                className="h-20 w-auto"
+                priority
+                onError={() => {
+                  console.log('Logo failed to load, switching to fallback');
+                  setLogoError(true);
+                }}
+                onLoad={() => console.log('Logo loaded successfully')}
+              />
+            ) : (
+              <div className="w-10 h-10 lg:w-12 lg:h-12 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center border border-white/20">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 text-white">
+                  <path d="M12 2L2 7v10c0 5.55 3.84 9.74 9 11 5.16-1.26 9-5.45 9-11V7l-10-5z" />
+                </svg>
+              </div>
+            )}
+          </motion.div>
         </div>
       </div>
     </motion.nav>

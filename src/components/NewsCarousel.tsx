@@ -19,7 +19,7 @@ const newsData = [
   {
     id: 2,
     title: "إطلاق برنامج القادة الشباب",
-    subtitle: "موؤسسة جديدة لتأهيل الجيل القادم من القيادات",
+    subtitle: "مؤسسة جديدة لتأهيل الجيل القادم من القيادات",
     description: "أطلقت مؤسسة الحياة الطيبة برنامجاً متخصصاً لتأهيل القادة الشباب، يهدف إلى تنمية المهارات القيادية والفكرية لدى الشباب من خلال ورش تدريبية متنوعة ومشاريع عملية.",
     date: "02 سبتمبر 2024",
     category: "برامج",
@@ -60,19 +60,63 @@ const newsData = [
 
 export default function NewsCarousel() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isAutoScrolling, setIsAutoScrolling] = useState(true);
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
+  const autoScrollRef = useRef<NodeJS.Timeout | null>(null);
 
   const handleCardClick = (index: number) => {
     setActiveIndex(index);
+    setIsAutoScrolling(false); // Pause auto-scroll on user interaction
   };
 
   const handleNext = () => {
     setActiveIndex((prev) => (prev + 1) % newsData.length);
+    setIsAutoScrolling(false); // Pause auto-scroll on user interaction
   };
 
   const handlePrev = () => {
     setActiveIndex((prev) => (prev - 1 + newsData.length) % newsData.length);
+    setIsAutoScrolling(false); // Pause auto-scroll on user interaction
+  };
+
+  // Auto-scroll functionality
+  useEffect(() => {
+    if (isAutoScrolling && inView) {
+      autoScrollRef.current = setInterval(() => {
+        setActiveIndex((prev) => (prev + 1) % newsData.length);
+      },4500); // Change slide every 5 seconds
+    } else {
+      if (autoScrollRef.current) {
+        clearInterval(autoScrollRef.current);
+      }
+    }
+
+    return () => {
+      if (autoScrollRef.current) {
+        clearInterval(autoScrollRef.current);
+      }
+    };
+  }, [isAutoScrolling, inView]);
+
+  // Resume auto-scroll after user interaction
+  useEffect(() => {
+    if (!isAutoScrolling) {
+      const resumeTimer = setTimeout(() => {
+        setIsAutoScrolling(true);
+      }, 2000); // Resume auto-scroll after 2 seconds of inactivity
+
+      return () => clearTimeout(resumeTimer);
+    }
+  }, [isAutoScrolling]);
+
+  // Pause auto-scroll on hover
+  const handleMouseEnter = () => {
+    setIsAutoScrolling(false);
+  };
+
+  const handleMouseLeave = () => {
+    setIsAutoScrolling(true);
   };
 
   return (
@@ -80,9 +124,11 @@ export default function NewsCarousel() {
       id="news"
       ref={ref}
       className="min-h-[90vh] flex items-center py-20 bg-gradient-to-br from-slate-50 to-blue-50 relative overflow-hidden"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
     >
       {/* Background decorative elements */}
-      <div className="absolute inset-0 bg-gradient-to-b from-blue-100/20 to-transparent" />
+      <div className="absolute inset-0 bg-white to-transparent" />
       
       <div className="container mx-auto px-4 relative z-10">
         {/* Header */}
@@ -90,7 +136,7 @@ export default function NewsCarousel() {
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          className="text-center mb-8"
         >
           <h2 className="text-5xl lg:text-6xl font-light text-center mb-4 text-teal-600 leading-tight">
             أحدث الأخبار
@@ -101,7 +147,7 @@ export default function NewsCarousel() {
         </motion.div>
 
         {/* CSS Coverflow Container */}
-        <div className="relative h-[700px] overflow-hidden">
+        <div className="relative h-[900px] overflow-hidden">
           <div className="coverflow-container flex items-center justify-center h-full relative">
             <style jsx>{`
               .coverflow-container {
@@ -275,40 +321,26 @@ export default function NewsCarousel() {
           {/* Navigation Arrows */}
           <button
             onClick={handlePrev}
-            className="absolute left-8 top-1/2 -translate-y-1/2 w-16 h-16 bg-white/90 backdrop-blur-sm rounded-full shadow-xl flex items-center justify-center text-teal-600 hover:bg-white hover:scale-110 transition-all duration-300 z-50"
+            className="absolute left-8 top-1/2 -translate-y-1/2 w-14 h-14 bg-teal-500 rounded-full shadow-lg flex items-center justify-center text-white hover:bg-teal-600 hover:scale-105 transition-all duration-300 z-50"
             aria-label="Previous news"
           >
-            <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12l7.5-7.5M3 12h18"/>
             </svg>
           </button>
 
           <button
             onClick={handleNext}
-            className="absolute right-8 top-1/2 -translate-y-1/2 w-16 h-16 bg-white/90 backdrop-blur-sm rounded-full shadow-xl flex items-center justify-center text-teal-600 hover:bg-white hover:scale-110 transition-all duration-300 z-50"
+            className="absolute right-8 top-1/2 -translate-y-1/2 w-14 h-14 bg-teal-500 rounded-full shadow-lg flex items-center justify-center text-white hover:bg-teal-600 hover:scale-105 transition-all duration-300 z-50"
             aria-label="Next news"
           >
-            <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12l-7.5 7.5M21 12H3"/>
             </svg>
           </button>
         </div>
 
-        {/* Dots Navigation */}
-        <div className="flex justify-center mt-12 space-x-3 space-x-reverse">
-          {newsData.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => setActiveIndex(index)}
-              className={`w-4 h-4 rounded-full transition-all duration-300 ${
-                index === activeIndex
-                  ? "bg-teal-600 scale-125 shadow-lg"
-                  : "bg-gray-300 hover:bg-gray-400"
-              }`}
-              aria-label={`Go to news ${index + 1}`}
-            />
-          ))}
-        </div>
+
       </div>
     </section>
   );

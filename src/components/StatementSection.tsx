@@ -69,8 +69,8 @@ function Statement() {
               <Image
                 src="/صورة صاحبة السمو.png"
                 alt="صورة الشخص"
-                width={260}
-                height={260}
+                width={400}
+                height={400}
                 className="w-25 h-auto object-cover"
               />
             </motion.div>

@@ -32,16 +32,16 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="contact" ref={ref} className="py-20 bg-gray-50">
-      <div className="container mx-auto px-4 max-w-4xl">
+    <section id="contact" ref={ref} className="py-8 bg-white min-h-screen flex flex-col justify-center">
+      <div className="container mx-auto px-4 max-w-7xl h-full">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          className="text-center mb-8"
         >
-          <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+          <h2 className="text-5xl lg:text-6xl font-bold text-teal-600 mb-4">
             تواصل معنا
           </h2>
         </motion.div>
@@ -51,49 +51,49 @@ export default function ContactSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="bg-white rounded-2xl shadow-lg p-8 lg:p-12"
+          className="bg-gray-50 rounded-3xl p-8 lg:p-10"
         >
-          <form onSubmit={handleSubmit} className="space-y-8">
+          <form onSubmit={handleSubmit} className="space-y-6">
             {/* First Row - Name, Email, Mobile */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="space-y-2">
-                <label className="block text-right text-gray-700 font-medium">
-                  الاسم كاملاً <span className="text-red-500">*</span>
+                <label className="block text-right text-gray-700 font-medium text-base">
+                  الاسم كاملاً <span className="text-black text-3xl font-bold">*</span>
                 </label>
                 <input
                   type="text"
                   name="fullName"
                   value={formData.fullName}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-right"
+                  className="w-full px-4 py-3 bg-white border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300 text-right text-base"
                   required
                 />
               </div>
               
               <div className="space-y-2">
-                <label className="block text-right text-gray-700 font-medium">
-                  البريد الإلكتروني <span className="text-red-500">*</span>
+                <label className="block text-right text-gray-700 font-medium text-base">
+                  البريد الإلكتروني <span className="text-black text-3xl font-bold">*</span>
                 </label>
                 <input
                   type="email"
                   name="email"
                   value={formData.email}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-right"
+                  className="w-full px-4 py-3 bg-white border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300 text-right text-base"
                   required
                 />
               </div>
               
               <div className="space-y-2">
-                <label className="block text-right text-gray-700 font-medium">
-                  الجوال <span className="text-red-500">*</span>
+                <label className="block text-right text-gray-700 font-medium text-base">
+                  الجوال <span className="text-black text-3xl font-bold">*</span>
                 </label>
                 <input
                   type="tel"
                   name="mobile"
                   value={formData.mobile}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-right"
+                  className="w-full px-4 py-3 bg-white border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300 text-right text-base"
                   required
                 />
               </div>
@@ -102,14 +102,14 @@ export default function ContactSection() {
             {/* Second Row - Gender, Message Type, Subject */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="space-y-2">
-                <label className="block text-right text-gray-700 font-medium">
-                  النوع <span className="text-red-500">*</span>
+                <label className="block text-right text-gray-700 font-medium text-base">
+                  النوع <span className="text-black text-3xl font-bold">*</span>
                 </label>
                 <select
                   name="gender"
                   value={formData.gender}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-right"
+                  className="w-full px-4 py-3 bg-white border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300 text-right text-base appearance-none"
                   required
                 >
                   <option value="" className="text-gray-400">اختر...</option>
@@ -119,14 +119,14 @@ export default function ContactSection() {
               </div>
               
               <div className="space-y-2">
-                <label className="block text-right text-gray-700 font-medium">
-                  نوع الرسالة <span className="text-red-500">*</span>
+                <label className="block text-right text-gray-700 font-medium text-base">
+                  نوع الرسالة <span className="text-black text-3xl font-bold">*</span>
                 </label>
                 <select
                   name="messageType"
                   value={formData.messageType}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-right"
+                  className="w-full px-4 py-3 bg-white border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300 text-right text-base appearance-none"
                   required
                 >
                   <option value="" className="text-gray-400">اختر...</option>
@@ -139,15 +139,15 @@ export default function ContactSection() {
               </div>
               
               <div className="space-y-2">
-                <label className="block text-right text-gray-700 font-medium">
-                  عنوان الرسالة <span className="text-red-500">*</span>
+                <label className="block text-right text-gray-700 font-medium text-base">
+                  عنوان الرسالة <span className="text-black text-3xl font-bold">*</span>
                 </label>
                 <input
                   type="text"
                   name="subject"
                   value={formData.subject}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-right"
+                  className="w-full px-4 py-3 bg-white border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300 text-right text-base"
                   required
                 />
               </div>
@@ -155,44 +155,30 @@ export default function ContactSection() {
 
             {/* Message Field */}
             <div className="space-y-2">
-              <label className="block text-right text-gray-700 font-medium">
+              <label className="block text-right text-gray-700 font-medium text-base">
                 نص الرسالة (اختياري)
               </label>
               <textarea
                 name="message"
                 value={formData.message}
                 onChange={handleInputChange}
-                rows={6}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-right resize-none"
+                rows={4}
+                className="w-full px-4 py-3 bg-white border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300 text-right text-base resize-none"
                 placeholder="اكتب رسالتك هنا..."
               />
             </div>
-
-            {/* Info Box */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="bg-green-50 border border-green-200 rounded-lg p-6"
-            >
-              <p className="text-gray-700 text-right leading-relaxed">
-                <span className="font-semibold">خدمات المركز:</span> مكتبة المركز، الورش التدريبية، قسم الاستشارات، الفعاليات والمؤتمرات.
-              </p>
-              <p className="text-gray-700 text-right leading-relaxed mt-2">
-                <span className="font-semibold">أركان الحياة الطيبة:</span> الركن الروحي، العاطفي، الفكري، الجسدي، والاجتماعي لتحقيق التوازن الشامل.
-              </p>
-            </motion.div>
+  
 
             {/* Submit Button */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 0.8, delay: 0.6 }}
-              className="flex justify-center"
+              className="flex justify-center pt-8"
             >
               <motion.button
                 type="submit"
-                className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-12 py-4 rounded-lg font-semibold text-lg hover:from-blue-700 hover:to-blue-800 transition-all duration-300 shadow-lg hover:shadow-xl"
+                className="bg-teal-600 text-white px-16 py-4 rounded-xl font-medium text-xl hover:bg-teal-700 transition-all duration-300 shadow-lg hover:shadow-xl"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -209,13 +195,13 @@ export default function ContactSection() {
           transition={{ duration: 0.8, delay: 0.8 }}
           className="mt-16 text-center"
         >
-          <p className="text-gray-600 text-lg mb-2">
-            مؤسسة الحياة الطيبة، نؤمن بأهمية التواصل الفعال، ونتطلع إلى مشاركتكم وتفاعلكم.
+          <p className="text-gray-600 text-xl mb-6 leading-relaxed max-w-4xl mx-auto">
+            مؤسسة الحياة الطيبة، نؤمن بأهمية التواصل الفعال، ونتطلع إلى مشاركتكم وتفاعلكم معنا لبناء مستقبل أفضل.
           </p>
-          <div className="space-y-2 text-gray-600">
-            <p>ص. ب. 12345 الدوحة، قطر</p>
-            <p>دولة قطر</p>
-            <p>البريد الإلكتروني: info@wellbeing-initiative.qa</p>
+          <div className="space-y-3 text-gray-600 text-lg">
+            <p className="font-medium">مؤسسة الحياة الطيبة للتدريب والتطوير المهني</p>
+            <p>ص. ب. 12345 الدوحة، دولة قطر</p>
+            <p className="text-teal-600 font-medium">info@wellbeing-initiative.qa</p>
           </div>
         </motion.div>
       </div>

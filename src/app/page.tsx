@@ -60,16 +60,16 @@ export default function Home() {
         <PhilosophySection />
         <OfferSection />
         <StatsSection />
-        <Bookshelf onBookClick={handleBookClick} />
+        {/* <Bookshelf onBookClick={handleBookClick} /> */}
         <NewsCarousel />
         <ContactSection />
         
         {/* Book Modal */}
-        <BookModal
+        {/* <BookModal
           book={selectedBook}
           isOpen={isModalOpen}
           onClose={handleCloseModal}
-        />
+        /> */}
         {/* Footer */}
         <footer className="bg-gray-900 text-white py-16">
           <div className="container mx-auto px-4 lg:px-6">

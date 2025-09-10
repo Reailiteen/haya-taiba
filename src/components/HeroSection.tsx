@@ -270,42 +270,6 @@ export default function HeroSection() {
           )}
         </button>
       </div>
-
-      {/* Navigation Arrows */}
-
-      <button
-        onClick={() => {
-          setIsUserInteracting(true);
-          setTimeout(() => setIsUserInteracting(false), 3000);
-          prev();
-        }}
-        className="absolute right-4 top-1/2 -translate-y-1/2 z-20 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full p-3 transition-all duration-200 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50"
-        aria-label="الشريحة التالية"
-        type="button"
-      >
-        <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-        </svg>
-      </button>
-
-
-      <button
-        onClick={() => {
-          setIsUserInteracting(true);
-          setTimeout(() => setIsUserInteracting(false), 3000);
-          next();
-        }}
-        className="absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full p-3 transition-all duration-200 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50"
-        aria-label="الشريحة السابقة"
-        type="button"
-      >
-        <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-        </svg>
-      </button>
-
-
-
       {/* Content */}
       <div className="relative z-10 flex flex-col items-center justify-center min-h-[100svh] text-center text-white px-4">
         <div className="max-w-4xl mx-auto space-y-8">
@@ -434,10 +398,10 @@ export default function HeroSection() {
                   ${isActive ? 'ring-2 ring-white ring-opacity-70' : 'hover:scale-105'}
                 `}
                 style={{
-                  width: isActive ? '40px' : '24px',
-                  height: isActive ? '40px' : '24px',
-                  minWidth: isActive ? '40px' : '24px',
-                  minHeight: isActive ? '40px' : '24px',
+                  width: isActive ? '70px' : '24px',
+                  height: isActive ? '70px' : '24px',
+                  minWidth: isActive ? '70px' : '24px',
+                  minHeight: isActive ? '70px' : '24px',
                 }}
                 whileHover={{ scale: isActive ? 1.05 : 1.1 }}
                 whileTap={{ scale: 0.95 }}
@@ -523,37 +487,6 @@ export default function HeroSection() {
             );
           })}
         </div>
-      </div>
-
-      {/* Scroll Indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5, duration: 0.8 }}
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20"
-      >
-        <button
-          onClick={scrollToNext}
-          className="flex flex-col items-center text-white hover:text-blue-300 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 rounded-lg p-2"
-          type="button"
-        >
-          <motion.div
-            animate={{ y: [0, 10, 0] }}
-            transition={{ repeat: Infinity, duration: 2 }}
-            className="w-6 h-6"
-          >
-            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-            </svg>
-          </motion.div>
-        </button>
-      </motion.div>
-
-      {/* Slide Counter */}
-      <div className="absolute bottom-4 right-4 z-20 bg-black/40 backdrop-blur-sm rounded-full px-3 py-1 text-white text-sm">
-        <span className="font-medium">{index + 1}</span>
-        <span className="text-gray-300 mx-1">/</span>
-        <span className="text-gray-300">{slides.length}</span>
       </div>
     </section>
   );
