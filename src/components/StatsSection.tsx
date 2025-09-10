@@ -66,13 +66,18 @@ const AnimatedNumber = ({ value, prefix, suffix }: { value: number; prefix: stri
     mass: 1 
   });
   const ref = useRef<HTMLSpanElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: false, margin: "-100px" }); // Changed to once: false
 
   useEffect(() => {
     if (isInView && value > 0) {
+      // Reset to 0 first, then animate to value
+      motionValue.set(0);
       setTimeout(() => {
         motionValue.set(value);
       }, 200);
+    } else if (!isInView) {
+      // Reset to 0 when not in view
+      motionValue.set(0);
     }
   }, [isInView, value, motionValue]);
 
@@ -104,7 +109,7 @@ const AnimatedNumber = ({ value, prefix, suffix }: { value: number; prefix: stri
 
 export default function MiskStatsSection() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.3 });
+  const isInView = useInView(ref, { once: false, amount: 0.3 }); // Changed to once: false
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -117,13 +122,15 @@ export default function MiskStatsSection() {
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 40 },
+    hidden: { 
+      opacity: 0, 
+      y: 40 
+    },
     visible: { 
       opacity: 1, 
       y: 0,
       transition: {
-        duration: 0.6,
-        ease: [0.25, 0.46, 0.45, 0.94]
+        duration: 0.6
       }
     },
   };
@@ -136,9 +143,9 @@ export default function MiskStatsSection() {
       className="relative overflow-hidden"
     >
       {/* Background Image Section with Title */}
-      <div className="relative h-[200px] lg:h-[205px] overflow-hidden">
+      <div className="relative h-[270px] lg:h-[275px] overflow-hidden">
           <Image
-            src="assets/cover-a-24-2-scaled.jpeg"
+            src="/assets/cover-a-24-2-scaled.jpeg"
             alt="Misk Event Background"
             fill
             className="object-cover object-center"
@@ -153,12 +160,14 @@ export default function MiskStatsSection() {
               animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
               transition={{ duration: 0.8 }}
             >
-              <h2 className="text-4xl lg:text-6xl font-light text-white mb-4 leading-tight">
+              <h2 className="text-4xl lg:text-6xl font-light text-black mb-4 leading-tight">
                 أبرز أرقام الحياة الطيبة
               </h2>
-              <p className="text-xl lg:text-2xl text-white/90 font-light">
-                في عام 2025
-              </p>
+              <div className="text-right">
+                <p className="text-xl lg:text-2xl text-black/80 font-light">
+                  في عام 2025
+                </p>
+              </div>
             </motion.div>
           </div>
         </div>
@@ -168,7 +177,7 @@ export default function MiskStatsSection() {
       <div 
         className="py-20 relative"
         style={{
-          background: 'linear-gradient(135deg, #00372a 0%, #00372f 100%)'
+          background: 'linear-gradient(135deg, #00372a 0%, #00372a 100%)'
         }}
       >
         <div className="container mx-auto px-6 lg:px-8 relative z-10">
@@ -182,7 +191,7 @@ export default function MiskStatsSection() {
           {miskStats.map((stat, index) => (
             <motion.div
               key={stat.id}
-              // variants={itemVariants}
+              variants={itemVariants}
               whileHover={{ 
                 scale: 1.05,
                 transition: { duration: 0.2 }
@@ -197,7 +206,7 @@ export default function MiskStatsSection() {
                     alt={stat.label}
                     width={64}
                     height={64}
-                    className="w-16 h-16 lg:w-20 lg:h-20 object-contain filter brightness-0 invert"
+                    className="w-16 h-16 lg:w-20 lg:h-20 object-contain"
                   />
                 </div>
               </div>
@@ -210,7 +219,7 @@ export default function MiskStatsSection() {
               />
 
               {/* Label */}
-              <p className="text-center text-sm lg:text-base font-medium text-white/90 leading-relaxed px-2 max-w-[200px]">
+              <p className="text-center text-sm lg:text-base font-medium text-white leading-relaxed px-2 max-w-[200px]">
                 {stat.label}
               </p>
             </motion.div>
@@ -226,7 +235,7 @@ export default function MiskStatsSection() {
         >
           <a
             href="#"
-            className="inline-flex items-center gap-3 px-8 py-4 bg-white text-teal-800 font-semibold rounded-lg hover:bg-gray-50 transition-all duration-300 hover:scale-105 shadow-lg"
+            className="inline-flex items-center gap-3 px-8 py-4 bg-teal-600 text-white font-semibold rounded-lg hover:bg-teal-700 transition-all duration-300 hover:scale-105 shadow-lg"
           >
             <span>عرض التقرير السنوي 2024</span>
             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
